@@ -127,7 +127,29 @@ public class Card {
 
     public ArrayList<Card> buildDeck(){
         ArrayList deck = new ArrayList();
-        deck.add(new Card());
+        //BLACK DRAGONS
+        deck.add(new Card("Black Dragon", 1, EVIL));
+        deck.add(new Card("Black Dragon", 2, EVIL));
+        deck.add(new Card("Black Dragon", 3, EVIL));
+        deck.add(new Card("Black Dragon", 5, EVIL));
+        deck.add(new Card("Black Dragon", 7, EVIL));
+        deck.add(new Card("Black Dragon", 9, EVIL));
+        //BLUE DRAGONS
+        deck.add(new Card("Blue Dragon", 1, EVIL));
+        deck.add(new Card("Blue Dragon", 2, EVIL));
+        deck.add(new Card("Blue Dragon", 4, EVIL));
+        deck.add(new Card("Blue Dragon", 7, EVIL));
+        deck.add(new Card("Blue Dragon", 9, EVIL));
+        deck.add(new Card("Blue Dragon", 11, EVIL));
+        //BRASS DRAGONS
+        deck.add(new Card("Brass Dragon", 1, EVIL));
+        deck.add(new Card("Brass Dragon", 2, EVIL));
+        deck.add(new Card("Brass Dragon", 4, EVIL));
+        deck.add(new Card("Brass Dragon", 5, EVIL));
+        deck.add(new Card("Brass Dragon", 7, EVIL));
+        deck.add(new Card("Brass Dragon", 9, EVIL));
+
+        return deck;
     }
 }
 
