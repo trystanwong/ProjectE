@@ -148,7 +148,31 @@ public class Card {
         deck.add(new Card("Brass Dragon", 5, EVIL));
         deck.add(new Card("Brass Dragon", 7, EVIL));
         deck.add(new Card("Brass Dragon", 9, EVIL));
-
+        //WHITE DRAGONS
+        deck.add(new Card("White Dragon", 1, EVIL));
+        deck.add(new Card("White Dragon", 2, EVIL));
+        deck.add(new Card("White Dragon", 3, EVIL));
+        deck.add(new Card("White Dragon", 4, EVIL));
+        deck.add(new Card("White Dragon", 6, EVIL));
+        deck.add(new Card("White Dragon", 8, EVIL));
+        //SILVER DRAGONS
+        deck.add(new Card("Silver Dragon", 2, GOOD));
+        deck.add(new Card("Silver Dragon", 3, GOOD));
+        deck.add(new Card("Silver Dragon", 6, GOOD));
+        deck.add(new Card("Silver Dragon", 8, GOOD));
+        deck.add(new Card("Silver Dragon", 10, GOOD));
+        deck.add(new Card("Silver Dragon", 12, GOOD));
+        //GREEN DRAGONS
+        deck.add(new Card("Green Dragon", 1, EVIL));
+        deck.add(new Card("Green Dragon", 2, EVIL));
+        deck.add(new Card("Green Dragon", 4, EVIL));
+        deck.add(new Card("Green Dragon", 6, EVIL));
+        deck.add(new Card("Green Dragon", 8, EVIL));
+        deck.add(new Card("Green Dragon", 10, EVIL));
+        //GOD DRAGONS
+        deck.add(new Card("Tiamat", 13, EVIL));
+        deck.add(new Card("Dracolich", 10, EVIL));
+        deck.add(new Card("Bahamut", 13, GOOD));
         return deck;
     }
 }
