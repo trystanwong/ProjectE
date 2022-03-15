@@ -40,13 +40,14 @@ public class Card {
      * @param initStrength: Strength of the card
      *
      */
-    public Card(String initName, int initStrength) {
+    public Card(String initName, int initStrength, int initType) {
 
         name = initName;
         strength = initStrength;
 
         power = null;//implemented later
-        type = 0;//implemented later
+        type = initType;
+
 
         placement = DECK;//starts in deck
 
