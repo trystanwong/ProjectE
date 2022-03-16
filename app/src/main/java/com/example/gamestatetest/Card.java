@@ -92,7 +92,13 @@ public class Card {
         return nameOfType;
     }
 
-    public String getPlacement() {
+    /**
+     *
+     * Getter for the location of each Card
+     *
+     * @return the placement of the card as a string
+     */
+    public String getPlacement(Card card) {
         //A string defining where the card is currently within the game
 
         String nameOfPlacement = "";

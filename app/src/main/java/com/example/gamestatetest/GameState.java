@@ -55,7 +55,9 @@ public class GameState {
     public GameState(){
 
         numPlayers = 4;
-        gamePhase = BEGIN_GAME;
+
+        //set to CHOICE to test chooseOption and chooseAnte methods
+        gamePhase = CHOICE;
         round = 1;
         gambit = 0;
 
@@ -71,13 +73,12 @@ public class GameState {
         roundLeader = 0;
 
         //Initializing the deck of cards using the buildDeck function in the card class
-        numCardsInDeck = 36;
+        numCardsInDeck = 70;
         Card c = new Card();
         deck = new ArrayList<>();
         deck = c.buildDeck();
 
         //initializing each players flight, hand, and hoard (each player starts with 50 gold)
-
         flights = new ArrayList<>();
         hands = new ArrayList<>();
         hoards = new int[4];
@@ -122,6 +123,7 @@ public class GameState {
         Card c = new Card();
         deck = new ArrayList<>();
         this.numCardsInDeck = gameStateCopy.numCardsInDeck;
+
         for(Card d : gameStateCopy.deck){
             int index = gameStateCopy.deck.indexOf(d);
             this.deck.add(new Card(d));
@@ -331,7 +333,7 @@ public class GameState {
             //do something (implemented later)
 
             //choice phase is over returns to the round
-            gamePhase = ROUND;
+            //gamePhase = ROUND; implemented later to be able to call other functions in test
             return true;
         }
         else{
@@ -410,11 +412,24 @@ public class GameState {
         }
     }
 
-    //getter for the currentPlayer instance variable
+    /**
+     *
+     * Getter for the current player instance variable
+     *
+     * @return current player
+     */
     public int getCurrentPlayer(){
         return currentPlayer;
     }
 
+    /**
+     *
+     * Returns a Card Object for the tests of each function that require a card.
+     *
+     * @param player - player who has the card in their hand
+     * @param index - where the card is in the hand
+     * @return
+     */
     public Card getCard(int player, int index){
         return hands.get(player).get(index);
     }
