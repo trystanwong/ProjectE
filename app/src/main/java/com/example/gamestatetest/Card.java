@@ -33,6 +33,9 @@ public class Card {
     private static final int EVIL = 1;
     private static final int MORTAL = 2;
 
+    public Card(){
+
+    }
     /**
      * Card: constructor for initializing the card
      *
@@ -66,7 +69,6 @@ public class Card {
         this.type = cardCopy.type;
         this.placement = cardCopy.placement;
     }
-
         /**
          * getType: A method for determining what type a card is
          *
@@ -125,8 +127,31 @@ public class Card {
         return name + " Strength: " +strength;
     }
 
+    /**
+     * Building the deck of all possible cards given information from the official rule book
+     *
+     * @return  ArrayList<Card> - deck of cards
+     */
     public ArrayList<Card> buildDeck(){
         ArrayList deck = new ArrayList();
+
+        //All Mortals
+        deck.add(new Card("The Fool",3,MORTAL));
+        deck.add(new Card("The Princess",4,MORTAL));
+        deck.add(new Card("The Priest",5,MORTAL));
+        deck.add(new Card("The Druid",6,MORTAL));
+        deck.add(new Card("The Thief",7,MORTAL));
+        deck.add(new Card("The DragonSlayer",8,MORTAL));
+        deck.add(new Card("The Archmage",9,MORTAL));
+
+        //All Red Dragons
+        deck.add(new Card("Red Dragon", 2, EVIL));
+        deck.add(new Card("Red Dragon", 3, EVIL));
+        deck.add(new Card("Red Dragon", 5, EVIL));
+        deck.add(new Card("Red Dragon", 8, EVIL));
+        deck.add(new Card("Red Dragon", 10, EVIL));
+        deck.add(new Card("Red Dragon", 12, EVIL));
+
         //BLACK DRAGONS
         deck.add(new Card("Black Dragon", 1, EVIL));
         deck.add(new Card("Black Dragon", 2, EVIL));
@@ -134,6 +159,7 @@ public class Card {
         deck.add(new Card("Black Dragon", 5, EVIL));
         deck.add(new Card("Black Dragon", 7, EVIL));
         deck.add(new Card("Black Dragon", 9, EVIL));
+
         //BLUE DRAGONS
         deck.add(new Card("Blue Dragon", 1, EVIL));
         deck.add(new Card("Blue Dragon", 2, EVIL));
@@ -141,6 +167,7 @@ public class Card {
         deck.add(new Card("Blue Dragon", 7, EVIL));
         deck.add(new Card("Blue Dragon", 9, EVIL));
         deck.add(new Card("Blue Dragon", 11, EVIL));
+
         //BRASS DRAGONS
         deck.add(new Card("Brass Dragon", 1, EVIL));
         deck.add(new Card("Brass Dragon", 2, EVIL));
@@ -148,33 +175,62 @@ public class Card {
         deck.add(new Card("Brass Dragon", 5, EVIL));
         deck.add(new Card("Brass Dragon", 7, EVIL));
         deck.add(new Card("Brass Dragon", 9, EVIL));
-        //WHITE DRAGONS
+
+        //Gold dragons
+        deck.add(new Card("Gold Dragon", 2, GOOD));
+        deck.add(new Card("Gold Dragon", 4, GOOD));
+        deck.add(new Card("Gold Dragon", 6, GOOD));
+        deck.add(new Card("Gold Dragon", 9, GOOD));
+        deck.add(new Card("Gold Dragon", 11, GOOD));
+        deck.add(new Card("Gold Dragon", 13, GOOD));
+
+        //Copper dragon
+        deck.add(new Card("Copper Dragon", 1, GOOD));
+        deck.add(new Card("Copper Dragon", 3, GOOD));
+        deck.add(new Card("Copper Dragon", 5, GOOD));
+        deck.add(new Card("Copper Dragon", 7, GOOD));
+        deck.add(new Card("Copper Dragon", 8, GOOD));
+        deck.add(new Card("Copper Dragon", 10, GOOD));
+
+        //White Dragon
         deck.add(new Card("White Dragon", 1, EVIL));
         deck.add(new Card("White Dragon", 2, EVIL));
         deck.add(new Card("White Dragon", 3, EVIL));
         deck.add(new Card("White Dragon", 4, EVIL));
         deck.add(new Card("White Dragon", 6, EVIL));
         deck.add(new Card("White Dragon", 8, EVIL));
-        //SILVER DRAGONS
+
+        //Silver Dragons
         deck.add(new Card("Silver Dragon", 2, GOOD));
         deck.add(new Card("Silver Dragon", 3, GOOD));
         deck.add(new Card("Silver Dragon", 6, GOOD));
         deck.add(new Card("Silver Dragon", 8, GOOD));
         deck.add(new Card("Silver Dragon", 10, GOOD));
         deck.add(new Card("Silver Dragon", 12, GOOD));
-        //GREEN DRAGONS
+
+        //Bronze Dragons
+        deck.add(new Card("Bronze Dragon", 1, GOOD));
+        deck.add(new Card("Bronze Dragon", 3, GOOD));
+        deck.add(new Card("Bronze Dragon", 6, GOOD));
+        deck.add(new Card("Bronze Dragon", 7, GOOD));
+        deck.add(new Card("Bronze Dragon", 9, GOOD));
+        deck.add(new Card("Bronze Dragon", 11, GOOD));
+
+        //Green Dragons
         deck.add(new Card("Green Dragon", 1, EVIL));
         deck.add(new Card("Green Dragon", 2, EVIL));
         deck.add(new Card("Green Dragon", 4, EVIL));
         deck.add(new Card("Green Dragon", 6, EVIL));
         deck.add(new Card("Green Dragon", 8, EVIL));
         deck.add(new Card("Green Dragon", 10, EVIL));
-        //GOD DRAGONS
+
+        //God Dragons
         deck.add(new Card("Tiamat", 13, EVIL));
         deck.add(new Card("Dracolich", 10, EVIL));
         deck.add(new Card("Bahamut", 13, GOOD));
 
         return deck;
+
     }
 }
 
