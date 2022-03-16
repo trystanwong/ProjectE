@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         OnClickListener oc = new OnClickListener();
         Button runTest = findViewById(R.id.runTestButton);
-        runTest.setOnClickListener(oc);
+        runTest.setOnClickListener(this);
 
         System.out.println(firstCopy);
 
@@ -36,8 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //playing the first card in the current players hand.
         boolean endTurn = firstInstance.endTurn(currentPlayer);
-        boolean playCard = firstInstance.playCard(currentPlayer,
-                firstInstance.getCard(currentPlayer,0));
+        EditText line = findViewById(R.id.simple);
+        line.setText("Hello", TextView.BufferType.SPANNABLE);
+        //boolean playCard = firstInstance.playCard(currentPlayer,
+                //firstInstance.getCard(currentPlayer,0));
+        boolean selectCard = firstInstance.selectCard();
         //boolean chooseAnte = firstInstance.chooseAnte();
     }
 }
