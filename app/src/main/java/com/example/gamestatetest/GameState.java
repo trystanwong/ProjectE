@@ -367,7 +367,7 @@ public class GameState {
     public boolean selectCard(){
 
         //returns true if there are any visible cards on the board to be selected
-        if(boardCards.size()>0){
+        if(numCardsOnBoard > 0){
             return true;
         }
         else{

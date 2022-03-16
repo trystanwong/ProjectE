@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GameState firstInstance = new GameState();
         GameState firstCopy = new GameState(firstInstance);
 
-        OnClickListener oc = new OnClickListener();
         Button runTest = findViewById(R.id.runTestButton);
         runTest.setOnClickListener(this);
 
@@ -39,10 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //playing the first card in the current players hand.
         boolean endTurn = firstInstance.endTurn(currentPlayer);
         EditText line = findViewById(R.id.simple);
-        line.setText("Hello", TextView.BufferType.SPANNABLE);
-        //boolean playCard = firstInstance.playCard(currentPlayer,
-                //firstInstance.getCard(currentPlayer,0));
+        line.setText(firstCopy.toString(), TextView.BufferType.SPANNABLE);
+        boolean playCard = firstInstance.playCard(currentPlayer,
+                firstInstance.getCard(currentPlayer,0));
         boolean selectCard = firstInstance.selectCard();
-        //boolean chooseAnte = firstInstance.chooseAnte();
+        boolean chooseAnte = firstInstance.chooseAnte(currentPlayer);
+        boolean forfeit = firstInstance.forfeit();
     }
 }
