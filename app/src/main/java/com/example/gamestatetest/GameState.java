@@ -40,20 +40,20 @@ public class GameState {
     private ArrayList<Card> deck; //current stack of deck
 
     //all player flights
-    private ArrayList<Card>[] flights;
+    private ArrayList<ArrayList<Card>> flights;
 
     //all player hands
-    private ArrayList<Card>[] hands;
+    private ArrayList<ArrayList<Card>> hands;
 
     //all player hoards and current stakes for the current gambit
     private int currentStakes;
     private int[] hoards;
 
     /**
-     * Constructor for the GameState at the beginning of the game
-     * @param initDeck - deck of all Card objects found in the game
+     * Default Constructor for the GameState at the beginning of the game
      */
-    public GameState(ArrayList<Card> initDeck){
+    public GameState(){
+
         numPlayers = 4;
         gamePhase = BEGIN_GAME;
         round = 1;
@@ -70,22 +70,21 @@ public class GameState {
         currentPlayer = 0;
         roundLeader = 0;
 
-        //70 playable cards
+        //Initializing the deck of cards using the buildDeck function in the card class
         numCardsInDeck = 36;
-
-        deck = new ArrayList<Card>();
-        //adding all of 70 cards into the deck
-        for(int i = 0; i < numCardsInDeck; i++){
-            deck.add(initDeck.get(i));
-        }
+        Card c = new Card();
+        deck = new ArrayList<>();
+        deck = c.buildDeck();
 
         //initializing each players flight, hand, and hoard (each player starts with 50 gold)
-        flights = new ArrayList[4];
-        hands = new ArrayList[4];
+
+        flights = new ArrayList<>();
+        hands = new ArrayList<>();
         hoards = new int[4];
+
         for(int i = 0; i < 4; i++){
-            flights[i] = new ArrayList<Card>();
-            hands[i] = new ArrayList<Card>();
+            flights.add(new ArrayList<>());
+            hands.add(new ArrayList<>());
             hoards[i] = 50;
         }
 
@@ -96,11 +95,12 @@ public class GameState {
             //adding 6 random cards to each players hand using the randomCard function
             //this is the starting hand of each player
             for (int j = 0; j < 6; j++) {
-                hands[i].add(randomCard());
+                hands.get(i).add(randomCard());
             }
             //adding 3 random cards to each players flights to test the toString function
             for(int k = 0; k < 3; k++){
-                flights[i].add(randomCard());
+                flights.get(i).add(randomCard());
+                numCardsOnBoard++;
             }
         }
     }
@@ -116,33 +116,41 @@ public class GameState {
         this.roundLeader = gameStateCopy.roundLeader;
 
         //copying the names
-        for(int i = 0; i < 4; i++){
-            this.id[i] = gameStateCopy.id[i];
-        }
+        this.hoards = gameStateCopy.hoards;
 
         //copying the cards in the deck
+        Card c = new Card();
+        deck = new ArrayList<>();
         this.numCardsInDeck = gameStateCopy.numCardsInDeck;
-        for(Card d : deck){
+        for(Card d : gameStateCopy.deck){
             int index = gameStateCopy.deck.indexOf(d);
-            this.deck.add(new Card(gameStateCopy.deck.get(index)));
+            this.deck.add(new Card(d));
         }
 
         //copying the cards on the board
+
         this.numCardsOnBoard = gameStateCopy.numCardsOnBoard;
+        boardCards = new ArrayList<>();
+
         for(Card b : boardCards){
-            int index = gameStateCopy.boardCards.indexOf(b);
-            this.boardCards.add(new Card(gameStateCopy.boardCards.get(index)));
+            this.boardCards.add(new Card(b));
         }
 
         //copying each player's hand and flight
+        hands = new ArrayList<>();
+        flights = new ArrayList<>();
+
         for(int i = 0; i < 4; i++){
-            for(Card c : gameStateCopy.hands[i] ){
-                int index = gameStateCopy.hands[i].indexOf(c);
-                this.hands[i].add(new Card(gameStateCopy.hands[i].get(index)));
+            flights.add(new ArrayList<>());
+            hands.add(new ArrayList<>());
+        }
+
+        for(int i = 0; i < 4; i++){
+            for(Card d : gameStateCopy.hands.get(i)){
+                this.hands.get(i).add(new Card(d));
             }
-            for(Card f : gameStateCopy.flights[i]){
-                int index = gameStateCopy.flights[i].indexOf(f);
-                this.flights[i].add(new Card(gameStateCopy.flights[i].get(index)));
+            for(Card f : gameStateCopy.flights.get(i)){
+                this.flights.get(i).add(new Card(f));
             }
         }
         this.currentStakes = gameStateCopy.currentStakes;
@@ -210,19 +218,20 @@ public class GameState {
         sb.append("ID of Current Round Leader: " + roundLeader+"\n");
         sb.append("Current Stakes: " + currentStakes + "\n");
         sb.append("Total Gambits: " + gambit +"\n");
+        sb.append("Total Cards on Board: " + numCardsOnBoard +"\n");
 
         //printing the resources for each player
         for(int i = 0; i < 4; i++){
             sb.append("----------------------------------\n");
-            sb.append("PLAYER "+i+":\n");
+            sb.append("\t\t\t PLAYER "+i+":\n");
             sb.append("Hoard: " + hoards[i] + "\n");
             sb.append("Hand: \n");
-            for(int j = 0; j < hands[i].size(); j++){
-                sb.append((j+1)+".\t"+hands[i].get(j).toString()+"\n");
+            for(int j = 0; j < hands.get(i).size(); j++){
+                sb.append((j+1)+".\t"+hands.get(i).get(j).toString()+"\n");
             }
             sb.append("Flight: \n");
-            for(int k = 0; k < flights[i].size(); k++){
-                sb.append((k+1)+".\t"+flights[i].get(k).toString()+"\n");
+            for(int k = 0; k < flights.get(i).size(); k++){
+                sb.append((k+1)+".\t"+flights.get(i).get(k).toString()+"\n");
             }
         }
         sb.append("----------------------------------\n");
@@ -238,6 +247,7 @@ public class GameState {
      */
     public Card randomCard(){
 
+        //seed set to 65 to get the same set of "random" cards every time for testing
         Random r = new Random(65);
         int random = r.nextInt(numCardsInDeck);
         Card newCard = deck.get(random);
@@ -382,16 +392,16 @@ public class GameState {
 
             //removes the card from the hand of the current player
             if(currentPlayer == 0){
-                hands[0].remove(card);
+                hands.get(0).remove(card);
             }
             if(currentPlayer == 1){
-                hands[1].remove(card);
+                hands.get(1).remove(card);
             }
             if(currentPlayer == 2){
-                hands[2].remove(card);
+                hands.get(2).remove(card);
             }
             if(currentPlayer == 3){
-                hands[3].remove(card);
+                hands.get(3).remove(card);
             }
             return true;
         }
@@ -400,6 +410,14 @@ public class GameState {
         }
     }
 
+    //getter for the currentPlayer instance variable
+    public int getCurrentPlayer(){
+        return currentPlayer;
+    }
+
+    public Card getCard(int player, int index){
+        return hands.get(player).get(index);
+    }
 
 
 }
