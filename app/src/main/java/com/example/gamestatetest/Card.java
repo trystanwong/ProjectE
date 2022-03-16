@@ -173,6 +173,7 @@ public class Card {
         deck.add(new Card("Tiamat", 13, EVIL));
         deck.add(new Card("Dracolich", 10, EVIL));
         deck.add(new Card("Bahamut", 13, GOOD));
+
         return deck;
     }
 }
